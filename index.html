@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertiser Portal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: rgb(29, 28, 43);
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .profile-top-container {
+            width: 100%;
+            min-height: 100vh;
+            background: rgb(29, 28, 43);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-content {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .detail-item {
+            margin-bottom: 8px;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            color: #2c3e50;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .status-active {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .amount-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .pending-amount {
+            font-size: 14px;
+            font-weight: 500;
+            color: #f39c12;
+        }
+
+        .reward-badge {
+            background-color: #f1c40f;
+            color: #2c3e50;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+            border: none;
+            text-decoration: none !important;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f7fc;
+        }
+
+        .account-masked {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        @media (max-width: 600px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 8px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .profile-details {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-top-container">
+        <div class="profile-content">
+            <div class="profile-header">
+                <div class="profile-avatar" id="avatar">AM</div>
+                <div class="profile-info">
+                    <h2 id="profileName">Advertiser</h2>
+                    <div class="detail-value status-active" id="status">Active Affiliate</div>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-item">
+                    <span class="detail-label">Full Name</span>
+                    <span class="detail-value" id="fullName">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Ad Code</span>
+                    <span class="detail-value account-masked" id="adCode">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Phone</span>
+                    <span class="detail-value" id="phone">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value" id="email">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Clients Recruited</span>
+                    <span class="detail-value" id="clients">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Bank Name</span>
+                    <span class="detail-value" id="bankName">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Account Number</span>
+                    <span class="detail-value account-masked" id="accountNumber">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Available Balance</span>
+                    <span class="amount-value" id="balance">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Pending Amount</span>
+                    <span class="pending-amount" id="pendingAmount">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Rewards Rate</span>
+                    <span class="detail-value reward-badge" id="rewardsRate">Loading...</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Member Since</span>
+                    <span class="detail-value" id="memberSince">Loading...</span>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="withdrawBtn">Withdraw Earnings</button>
+                <a href="https://96studios.co.za"><button class="btn btn-secondary">Shop Now</button></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Advertiser Profile Data - Edit this section only to update profile
+        const advertiserData = {
+            avatarInitials: "LM",
+            profileName: "Advertiser",
+            status: "Active Affiliate",
+            fullName: "Lekau Mamabolo",
+            adCode: "96-96MZWF",
+            phone: "+27 71 579 3678",
+            email: "lekaumamabolo@bamg.co.za",
+            clientsRecruited: 1,
+            bankName: "N/A",
+            accountNumber: "N/A", // Full number for reference, will be masked
+            balance: 0.00,
+            pendingAmount: 96.00,
+            rewardsRate: "30%",
+            memberSince: "03 June 2024",
+            whatsappNumber: "27817925033" // Your WhatsApp business number
+        };
+
+        // Function to mask sensitive information (last 4 digits visible)
+        function maskData(value, visibleDigits = 4) {
+            if (!value) return "";
+            const str = value.toString();
+            if (str.length <= visibleDigits) return str;
+            return '•'.repeat(str.length - visibleDigits) + str.slice(-visibleDigits);
+        }
+
+        // Format currency with R and commas
+        function formatCurrency(amount) {
+            return 'R' + amount.toLocaleString('en-ZA', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Initialize the page with advertiser data
+        function initProfile() {
+            // Set profile header
+            document.getElementById('avatar').textContent = advertiserData.avatarInitials;
+            document.getElementById('profileName').textContent = advertiserData.profileName;
+            document.getElementById('status').textContent = advertiserData.status;
+
+            // Set profile details
+            document.getElementById('fullName').textContent = advertiserData.fullName;
+            document.getElementById('adCode').textContent = "96-•••" + advertiserData.adCode.slice(-3);
+            document.getElementById('phone').textContent = advertiserData.phone;
+            document.getElementById('email').textContent = advertiserData.email;
+            document.getElementById('clients').textContent = advertiserData.clientsRecruited;
+            document.getElementById('bankName').textContent = advertiserData.bankName;
+            document.getElementById('accountNumber').textContent = maskData(advertiserData.accountNumber);
+            document.getElementById('balance').textContent = formatCurrency(advertiserData.balance);
+            document.getElementById('pendingAmount').innerHTML = `${formatCurrency(advertiserData.pendingAmount)} <small>(to be paid upon client confirmation)</small>`;
+            document.getElementById('rewardsRate').textContent = advertiserData.rewardsRate;
+            document.getElementById('memberSince').textContent = advertiserData.memberSince;
+        }
+
+        // Withdraw button functionality
+        document.getElementById('withdrawBtn').addEventListener('click', function() {
+            const message = `Withdrawal Request:\n\n` +
+                           `Ad Code: ${advertiserData.adCode}\n` +
+                           `Available Balance: ${formatCurrency(advertiserData.balance)}\n\n` +
+                           `Please process my withdrawal.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${advertiserData.whatsappNumber}?text=${encodedMessage}`, '_blank');
+        });
+
+        // Initialize the page when loaded
+        document.addEventListener('DOMContentLoaded', initProfile);
+    </script>
+</body>
+</html>
